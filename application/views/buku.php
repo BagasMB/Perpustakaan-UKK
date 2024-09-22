@@ -38,9 +38,10 @@
 										<?php if ($this->session->userdata('role') != 'Peminjam') :  ?>
 											<span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $value['id_buku']; ?>">Edit</span>
 											<a href="<?= base_url('buku/hapus/' . $value['id_buku']); ?>" id="btn-hapus" class="badge bg-danger">Delete</a>
+										<?php elseif ($this->session->userdata('role') == 'Peminjam') : ?>
+											<a href="<?= base_url('peminjaman/peminjaman-buku/' . $value['id_buku']); ?>" class="badge bg-warning">Pinjam</a>
+											<a href="<?= base_url('koleksi/simpan/' . $value['id_buku']); ?>" class="badge bg-success">Favorit</a>
 										<?php endif; ?>
-										<a href="<?= base_url('peminjaman/peminjaman-buku/' . $value['id_buku']); ?>" class="badge bg-warning">Pinjam</a>
-										<a href="<?= base_url('koleksi/simpan/' . $value['id_buku']); ?>" class="badge bg-success">Favorit</a>
 									</td>
 								</tr>
 

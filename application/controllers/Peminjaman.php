@@ -174,4 +174,28 @@ class Peminjaman extends CI_Controller
     $this->session->set_flashdata('berhasil', 'Buku dikembaikan untuk dipinjam');
     redirect($_SERVER['HTTP_REFERER']);
   }
+
+  public function bayardenda()
+  {
+    $total_denda = $this->input->post('total_denda');
+    $sudah_dibayar = $this->input->post('sudah_dibayar');
+    $sisa_denda = $this->input->post('sisa_denda');
+    $bayar_denda = $this->input->post('bayar_denda');
+
+    // SetStatus
+    $status = $total_denda == $sudah_dibayar + $bayar_denda ? 'Lunas' : 'Belum Lunas';
+    if ($sisa_denda >= $bayar_denda) {
+      $data = [
+        'sudah_dibayar' => $sudah_dibayar + $bayar_denda,
+        'status_denda' => $status,
+      ];
+      $where = ['id_denda' => $this->input->post('id_denda')];
+      $this->db->update('denda', $data, $where);
+    } else {
+      $this->session->set_flashdata('gagal', 'Yang dibayar melebihi');
+    }
+
+    $this->session->set_flashdata('berhasil', 'Denda Sudah DiBayar');
+    redirect($_SERVER['HTTP_REFERER']);
+  }
 }

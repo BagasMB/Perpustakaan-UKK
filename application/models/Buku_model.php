@@ -20,8 +20,6 @@ class Buku_model extends CI_Model
   public function edit()
   {
     $stok = $this->db->get_where('buku', ['id_buku' => $this->input->post('id_buku')])->row();
-    var_dump($stok);
-    die;
     $data = [
       'judul'         => $this->input->post('judul'),
       'penerbit'      => $this->input->post('penerbit'),

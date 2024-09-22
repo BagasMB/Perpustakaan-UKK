@@ -42,6 +42,7 @@ class Peminjaman_model extends CI_Model
 
   public function cek_buku_sudah_dipilih($id_buku)
   {
-    return $this->db->where('id_buku', $id_buku)->where('id_user', $this->session->userdata('id_user'))->get('temp')->result_array();
+    $this->db->where('id_buku', $id_buku)->where('id_user', $this->session->userdata('id_user'));
+    return $this->db->get('temp')->result_array();
   }
 }

@@ -69,39 +69,47 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="myModalLabel1">Modal Ulasan</h5>
+                      <h5 class="modal-title" id="myModalLabel1">Modal Denda</h5>
                       <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
                         aria-label="Close">
                         <i data-feather="x"></i>
                       </button>
                     </div>
-                    <form action="<?= base_url('denda/assa'); ?>" method="post">
-                      <input type="hidden" name="id_ulasan" value="<?= $value->id_ulasan; ?>">
+                    <form action="<?= base_url('denda'); ?>" method="post">
+                      <input type="hidden" name="id_denda" value="<?= $denda->id_denda; ?>">
                       <div class="modal-body">
-                        <fieldset class="form-group">
-                          <label for="rating" class="form-label">Rating</label>
-                          <select class="form-select" id="rating" name="rating">
-                            <option value="5" <?= $ulasan->rating == 5 ? 'selected' : ''; ?>>5</option>
-                            <option value="4" <?= $ulasan->rating == 4 ? 'selected' : ''; ?>>4</option>
-                            <option value="3" <?= $ulasan->rating == 3 ? 'selected' : ''; ?>>3</option>
-                            <option value="2" <?= $ulasan->rating == 2 ? 'selected' : ''; ?>>2</option>
-                            <option value="1" <?= $ulasan->rating == 1 ? 'selected' : ''; ?>>1</option>
-                          </select>
-                        </fieldset>
-                        <div class="form-group">
-                          <label for="ulasan" class="form-label">Sara atau Ulasan</label>
-                          <textarea class="form-control" id="ulasan" name="ulasan" autocomplete="off" rows="3"><?= $ulasan->ulasan; ?></textarea>
+                        <div class="row">
+                          <div class="form-group col-lg-6">
+                            <label for="total_denda" class="form-label">Total Denda</label>
+                            <input type="text" class="form-control" id="total_denda" name="total_denda" value="<?= $denda->total_denda; ?>" autocomplete="off" readonly>
+                          </div>
+                          <div class="form-group col-lg-6">
+                            <label for="sudah_dibayar" class="form-label">Sudah Dibayar</label>
+                            <input type="text" class="form-control" id="sudah_dibayar" name="sudah_dibayar" value="<?= $denda->sudah_dibayar; ?>" autocomplete="off" readonly>
+                          </div>
+                          <div class="form-group col-lg-6">
+                            <label for="sisa_denda" class="form-label">Sisa Denda</label>
+                            <input type="text" class="form-control" id="sisa_denda" name="sisa_denda" value="<?= $denda->total_denda - $denda->sudah_dibayar; ?>" autocomplete="off" readonly>
+                          </div>
+                          <?php if ($this->session->userdata('role') != 'Peminjam') : ?>
+                            <div class="form-group col-lg-6">
+                              <label for="bayar_denda" class="form-label">Bayar Denda</label>
+                              <input type="text" class="form-control" id="bayar_denda" name="bayar_denda" autocomplete="off" value="<?= $denda->status_denda == 'Lunas' ? 'LUNAS' : ''; ?>" <?= $denda->status_denda == 'Lunas' ? 'disabled' : ''; ?>>
+                            </div>
+                          <?php endif; ?>
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn" data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                           <i class="bx bx-x d-block d-sm-none"></i>
                           <span class="d-none d-sm-block">Close</span>
                         </button>
-                        <button type="submit" class="btn btn-primary ms-1" data-bs-dismiss="modal">
-                          <i class="bx bx-check d-block d-sm-none"></i>
-                          <span class="d-none d-sm-block">Simpan</span>
-                        </button>
+                        <?php if ($this->session->userdata('role') != 'Peminjam') : ?>
+                          <button type="submit" class="btn btn-<?= $denda->status_denda == 'Lunas' ? 'success' : 'primary'; ?> ms-1" <?= $denda->status_denda == 'Lunas' ? 'disabled' : ''; ?> data-bs-dismiss="modal">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block"><?= $denda->status_denda == 'Lunas' ? 'Lunas' : 'Bayar'; ?></span>
+                          </button>
+                        <?php endif; ?>
                       </div>
                     </form>
                   </div>
@@ -124,6 +132,7 @@
                         <fieldset class="form-group">
                           <label for="rating" class="form-label">Rating</label>
                           <select class="form-select" id="rating" name="rating">
+                            <option>-Pilih-</option>
                             <option value="5" <?= $ulasan->rating == 5 ? 'selected' : ''; ?>>5</option>
                             <option value="4" <?= $ulasan->rating == 4 ? 'selected' : ''; ?>>4</option>
                             <option value="3" <?= $ulasan->rating == 3 ? 'selected' : ''; ?>>3</option>
@@ -132,7 +141,7 @@
                           </select>
                         </fieldset>
                         <div class="form-group">
-                          <label for="ulasan" class="form-label">Sara atau Ulasan</label>
+                          <label for="ulasan" class="form-label">Saran atau Ulasan</label>
                           <textarea class="form-control" id="ulasan" name="ulasan" autocomplete="off" rows="3"><?= $ulasan->ulasan; ?></textarea>
                         </div>
                       </div>

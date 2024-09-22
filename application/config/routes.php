@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['peminjaman/peminjaman-buku/(:num)'] = 'peminjaman/peminjamanBuku/$1';
 $route['ulas'] = 'ulasan/ulas';
+$route['denda'] = 'peminjaman/bayardenda';
