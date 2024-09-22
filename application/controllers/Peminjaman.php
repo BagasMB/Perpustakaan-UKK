@@ -161,12 +161,16 @@ class Peminjaman extends CI_Controller
       $status = 'Dikembalikan';
     }
 
-    $stok = (int) $this->db->get_where('buku', ['id_buku' => $id_buku])->row()->stok;
-    $data_detail = ['status' => $status, 'id_denda' => $id_denda_last, 'tanggal_pengembalian_real' => date('Y-m-d')];
+    $data_detail = [
+      'status' => $status,
+      'id_denda' => $id_denda_last,
+      'tanggal_pengembalian_real' => date('Y-m-d')
+    ];
     $where = ['id_detail_peminjaman' => $id_detail];
     $this->db->update('detail_peminjaman', $data_detail, $where);
-
+    
     // Update stok buku
+    $stok = (int) $this->db->get_where('buku', ['id_buku' => $id_buku])->row()->stok;
     $data1 = ['stok' => $stok + 1];
     $where1 = ['id_buku' => $id_buku];
     $this->db->update('buku', $data1, $where1);
