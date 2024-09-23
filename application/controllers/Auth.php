@@ -89,9 +89,14 @@ class Auth extends CI_Controller
 
   public function logout()
   {
+    if ($this->session->userdata('role') != 'Peminjam') {
+      $redi = 'auth';
+    } else {
+      $redi = '';
+    }
     $this->session->sess_destroy();
     $this->session->set_flashdata('berhasil', 'Anda Berhasil logout!!!');
-    redirect('auth');
+    redirect($redi);
   }
 
   public function my404()

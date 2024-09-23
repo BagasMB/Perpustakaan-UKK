@@ -22,9 +22,14 @@
   <link rel="stylesheet" href="<?= base_url('assets/frontend/'); ?>css/owl.carousel.min.css" type="text/css">
   <link rel="stylesheet" href="<?= base_url('assets/frontend/'); ?>css/slicknav.min.css" type="text/css">
   <link rel="stylesheet" href="<?= base_url('assets/frontend/'); ?>css/style.css" type="text/css">
+
+  <!-- SweetAlert -->
+  <link rel="stylesheet" href="<?= base_url(''); ?>assets/extensions/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
+  <div id="alert-berhasil" data-flashdata="<?= $this->session->flashdata('berhasil'); ?>"></div>
+  <div id="alert-gagal" data-flashdata="<?= $this->session->flashdata('gagal'); ?>"></div>
   <!-- Offcanvas Menu Begin -->
   <div class="offcanvas-menu-overlay"></div>
   <div class="offcanvas-menu-wrapper">
@@ -212,6 +217,28 @@
   <script src="<?= base_url('assets/frontend/'); ?>js/mixitup.min.js"></script>
   <script src="<?= base_url('assets/frontend/'); ?>js/owl.carousel.min.js"></script>
   <script src="<?= base_url('assets/frontend/'); ?>js/main.js"></script>
+
+  <!-- sweetalert -->
+  <script src="<?= base_url(''); ?>assets/extensions/jquery/jquery.min.js"></script>
+  <script src="<?= base_url(''); ?>assets/extensions/sweetalert2/sweetalert2.min.js"></script>
+  <script src="<?= base_url(''); ?>assets/static/js/pages/sweetalert2.js"></script>
+
+  <script>
+    const success = $('#alert-berhasil').data('flashdata'),
+      gagal = $('#alert-gagal').data('flashdata');
+    if (success) {
+      Toast.fire({
+        icon: 'success',
+        title: success
+      });
+    }
+    if (gagal) {
+      Toast.fire({
+        icon: 'error',
+        title: gagal
+      });
+    }
+  </script>
 </body>
 
 </html>
