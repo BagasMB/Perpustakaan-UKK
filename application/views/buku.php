@@ -37,7 +37,7 @@
 									<td>
 										<?php if ($this->session->userdata('role') != 'Peminjam') :  ?>
 											<span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#modal-edit<?= $value['id_buku']; ?>">Edit</span>
-											<a href="<?= base_url('buku/hapus/' . $value['id_buku']); ?>" id="btn-hapus" class="badge bg-danger">Delete</a>
+											<a href="<?= base_url('buku/hapus/' . $value['foto']); ?>" id="btn-hapus" class="badge bg-danger">Delete</a>
 										<?php elseif ($this->session->userdata('role') == 'Peminjam') : ?>
 											<a href="<?= base_url('peminjaman/peminjaman-buku/' . $value['id_buku']); ?>" class="badge bg-warning">Pinjam</a>
 											<a href="<?= base_url('koleksi/simpan/' . $value['id_buku']); ?>" class="badge bg-success">Favorit</a>
@@ -56,8 +56,8 @@
 													<i data-feather="x"></i>
 												</button>
 											</div>
-											<form action="<?= base_url('buku/edit'); ?>" method="post">
-												<input type="hidden" name="id_buku" value="<?= $value['id_buku']; ?>">
+											<form action="<?= base_url('buku/edit'); ?>" method="post" enctype="multipart/form-data">
+												<input type="hidden" name="namafoto" value="<?= $value['foto']; ?>">
 												<div class="modal-body">
 													<div class="row">
 														<div class="form-group col-sm-6">
@@ -91,6 +91,12 @@
 														<div class="form-group col-sm-6">
 															<label for="jumlah" class="form-label">Jumlah</label>
 															<input type="number" class="form-control" id="jumlah" name="jumlah" value="<?= $value['jumlah']; ?>" placeholder="Jumlah Buku" autocomplete="off">
+														</div>
+													</div>
+													<div class="row">
+														<div class="form-group col-12">
+															<label for="foto" class="form-label">Foto</label>
+															<input type="file" class="form-control" id="foto" name="foto" autocomplete="off">
 														</div>
 													</div>
 												</div>
@@ -127,7 +133,7 @@
 						<i data-feather="x"></i>
 					</button>
 				</div>
-				<form action="<?= base_url('buku/simpan'); ?>" method="post">
+				<form action="<?= base_url('buku/simpan'); ?>" method="post" enctype="multipart/form-data">
 					<div class="modal-body">
 						<div class="row">
 							<div class="form-group col-sm-6">
@@ -161,6 +167,12 @@
 							<div class="form-group col-sm-6">
 								<label for="jumlah" class="form-label">Jumlah</label>
 								<input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Jumlah Buku" autocomplete="off">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-12">
+								<label for="foto" class="form-label">Foto</label>
+								<input type="file" class="form-control" id="foto" name="foto" autocomplete="off">
 							</div>
 						</div>
 					</div>

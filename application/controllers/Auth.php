@@ -37,7 +37,10 @@ class Auth extends CI_Controller
         ];
         $this->session->set_userdata($data);
         $this->session->set_flashdata('berhasil', 'Selamat Datang');
-        redirect('');
+        if ($user->role != 'Peminjam') {
+          redirect('dashboard');
+        }
+        redirect();
       } else {
         $this->session->set_flashdata('gagal', 'Password Salah');
         redirect($_SERVER['HTTP_REFERER']);

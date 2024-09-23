@@ -43,8 +43,8 @@
          <ul class="menu">
            <li class="sidebar-title">Menu</li>
 
-           <li class="sidebar-item  <?= $menu == '' ? 'active' : ($menu == 'dashboard' ? 'active' : ''); ?>">
-             <a href="<?= base_url(''); ?>" class='sidebar-link'>
+           <li class="sidebar-item  <?= $menu == 'dashboard' ? 'active' : ''; ?>">
+             <a href="<?= base_url('dashboard'); ?>" class='sidebar-link'>
                <i class="bi bi-grid-fill"></i>
                <span>Dashboard</span>
              </a>
