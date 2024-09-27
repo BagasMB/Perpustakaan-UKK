@@ -21,7 +21,7 @@ class User extends CI_Controller
       'user' => $this->db->get('user')->result_array(),
     ];
 
-    $this->template->load('template/layout', 'user', $data);
+    $this->template->load('template/layout', 'admin/user', $data);
   }
 
   public function simpan()

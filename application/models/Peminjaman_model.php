@@ -16,7 +16,15 @@ class Peminjaman_model extends CI_Model
     if ($this->session->userdata('role') == 'Peminjam') {
       $this->db->where('peminjaman.id_user', $this->session->userdata('id_user'));
     }
-    return $this->db->get()->result_array();
+    return $this->db->get()->result();
+  }
+
+  public function getTemp()
+  {
+    $this->db->join('user', 'user.id_user=temp.id_user');
+    $this->db->join('buku', 'buku.id_buku=temp.id_buku');
+    $this->db->where('temp.id_user', $this->session->userdata('id_user'));
+    return $this->db->get('temp')->result();
   }
 
   public function kode_peminjaman()

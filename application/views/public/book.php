@@ -6,8 +6,14 @@
         <div class="breadcrumb__text">
           <h4>Book</h4>
           <div class="breadcrumb__links">
+            <?php $men = $this->uri->segment(2); ?>
             <a href="<?= base_url(); ?>">Home</a>
-            <span>Book</span>
+            <?php if ($men == "category") : ?>
+              <a href="<?= base_url('book'); ?>">Book</a>
+              <span>Categories</span>
+            <?php else : ?>
+              <span>Book</span>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -32,14 +38,14 @@
             <div class="accordion" id="accordionExample">
               <div class="card">
                 <div class="card-heading">
-                  <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                  <a href="<?= base_url('book'); ?>" data-toggle="collapse" data-target="#collapseOne">Categories</a>
                 </div>
                 <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                   <div class="card-body">
                     <div class="shop__sidebar__categories">
                       <ul class="nice-scroll">
                         <?php foreach ($kategori as $kae) : ?>
-                          <li><a href="<?= base_url('book'); ?>"><?= $kae->nama_kategori; ?></a></li>
+                          <li><a href="<?= base_url('book/category/' . $kae->id_kategori); ?>"><?= $kae->nama_kategori; ?></a></li>
                         <?php endforeach; ?>
                       </ul>
                     </div>
@@ -54,22 +60,9 @@
       <!-- Bagian Book -->
       <div class="col-lg-9">
         <div class="shop__product__option">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="shop__product__option__left">
-                <p>Showing 1–12 of 126 results</p>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-              <div class="shop__product__option__right">
-                <p>Sort by Price:</p>
-                <select>
-                  <option value="">Low To High</option>
-                  <option value="">$0 - $55</option>
-                  <option value="">$55 - $100</option>
-                </select>
-              </div>
-            </div>
+          <div class="section-title">
+            <h2>Daftar Buku</h2>
+            <span>Category : <?= $men == "category" ? $nama_kategori : 'All'; ?></span>
           </div>
         </div>
         <div class="row">
@@ -77,27 +70,32 @@
             <div class="col-lg-4 col-md-6 col-sm-6">
               <div class="product__item sale">
                 <div class="product__item__pic set-bg" data-setbg="<?= base_url('assets/img/buku/' . $buk->foto); ?>">
-                  <span class="label">Sale</span>
+                  <span class="label"><?= $buk->stok == 0 ? 'Tidak Tersedia' : 'Tersedia'; ?></span>
                   <ul class="product__hover">
-                    <li><a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""><span>Favorit</span></a></li>
-                    <li><a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/compare.png" alt=""><span>Compare</span></a>
+                    <li>
+                      <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""><span>Favorit</span></a>
                     </li>
-                    <li><a href="<?= base_url('book/detail/' . $buk->id_buku); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/search.png" alt=""><span>Detail</span></a></li>
+                    <li>
+                      <a href="<?= base_url('add-keranjang/' . $buk->id_buku); ?>" id="btn-keranjang"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""><span>Add Cart</span></a>
+                    </li>
+                    <li>
+                      <a href="<?= base_url('book/detail/' . $buk->id_buku); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/search.png" alt=""><span>Detail</span></a>
+                    </li>
                   </ul>
                 </div>
                 <div class="product__item__text">
                   <h6><?= $buk->judul; ?></h6>
-                  <a href="#" class="add-cart">Categories : <?= $buk->nama_kategori; ?></a>
+                  <a href="<?= base_url('book/category/' . $buk->id_kategori); ?>" class="add-cart">Category : <?= $buk->nama_kategori; ?></a>
                   <div class="rating">
-                    Rating
-                    <span class="text-danger"><?= $buk->rating == null ? 0 : $buk->rating; ?> / 5</span>
+                    <?= $buk->rating == null ? '' : 'Rating'; ?>
+                    <span class="text-danger"><?= $buk->rating == null ? 'Belum di Rating' : $buk->rating . ' / 5'; ?></span>
                     <!-- <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i> -->
                   </div>
-                  <!-- <h5>$43.48</h5> -->
+                  <h6>Penulis : <?= $buk->penulis; ?></h6>
                 </div>
               </div>
             </div>

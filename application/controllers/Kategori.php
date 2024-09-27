@@ -20,7 +20,7 @@ class Kategori extends CI_Controller
       'kategori' => $this->db->get('kategori')->result_array(),
     ];
 
-    $this->template->load('template/layout', 'kategori', $data);
+    $this->template->load('template/layout', 'admin/kategori', $data);
   }
 
   public function simpan()

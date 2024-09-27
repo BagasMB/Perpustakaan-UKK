@@ -53,10 +53,26 @@ $route['default_controller'] = 'homepage';
 $route['404_override'] = 'auth/my404';
 $route['translate_uri_dashes'] = FALSE;
 
+// Admin Page
 $route['peminjaman/peminjaman-buku/(:num)'] = 'peminjaman/peminjamanBuku/$1';
 $route['ulas'] = 'ulasan/ulas';
 $route['denda'] = 'peminjaman/bayardenda';
 
+// HomePage
 $route['homepage'] = 'public/homepage';
+
+// Peminjaman User 
+$route['peminjaman-user'] = 'public/PeminjamanUser';
+$route['keranjang'] = 'public/PeminjamanUser/keranjang';
+$route['pinjam/detail/(:num)'] = 'public/PeminjamanUser/detail/$1';
+$route['add-keranjang/(:num)'] = 'public/PeminjamanUser/addKeranjang/$1';
+$route['hpskeranjang/(:num)'] = 'public/PeminjamanUser/hapuskeranjang/$1';
+$route['peminjaman/proses'] = 'public/PeminjamanUser/prosesPeminjaman';
+
+// Books
 $route['book'] = 'public/book';
 $route['book/detail/(:num)'] = 'public/book/detail/$1';
+$route['book/category/(:num)'] = 'public/book/category/$1';
+
+// Contact 
+$route['contact'] = 'public/contact';

@@ -9,8 +9,10 @@ class Homepage extends CI_Controller
   }
   public function index()
   {
+    $this->load->model('Buku_model');
     $data = [
       'title' => 'Homepage',
+      'buku' => $this->Buku_model->getBukuLimit(),
     ];
 
     $this->template->load('template/template_public', 'public/homepage', $data);

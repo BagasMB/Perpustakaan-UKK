@@ -19,7 +19,7 @@ class Koleksi extends CI_Controller
       'koleksi' => $this->db->join('user', 'user.id_user = koleksi.id_user')->join('buku', 'buku.id_buku = koleksi.id_buku')->join('kategori', 'buku.id_kategori = kategori.id_kategori')->where('user.id_user', $this->session->userdata('id_user'))->get('koleksi')->result()
     ];
 
-    $this->template->load('template/layout', 'koleksi', $data);
+    $this->template->load('template/layout', 'admin/koleksi', $data);
   }
 
   public function simpan($id_buku)

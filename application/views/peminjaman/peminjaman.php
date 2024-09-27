@@ -21,12 +21,12 @@
             foreach ($peminjaman as  $value): ?>
               <tr>
                 <td><?= $no++; ?></td>
-                <td><?= $value['kode_peminjaman']; ?></td>
-                <td><?= $value['nama']; ?></td>
-                <td><?= $value['tanggal_peminjaman']; ?></td>
-                <td><?= $value['tanggal_pengembalian']; ?></td>
+                <td><?= $value->kode_peminjaman; ?></td>
+                <td><?= $value->nama; ?></td>
+                <td><?= $value->tanggal_peminjaman; ?></td>
+                <td><?= $value->tanggal_pengembalian; ?></td>
                 <td>
-                  <a href="<?= base_url('peminjaman/detail/' . $value['kode_peminjaman']); ?>" class="badge bg-primary">Detail</a>
+                  <a href="<?= base_url('peminjaman/detail/' . $value->kode_peminjaman); ?>" class="badge bg-primary">Detail</a>
                 </td>
               </tr>
             <?php endforeach; ?>

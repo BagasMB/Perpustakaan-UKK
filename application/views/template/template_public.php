@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" style="scroll-behavior: smooth;">
 
 <head>
   <meta charset="UTF-8">
@@ -24,18 +24,23 @@
   <link rel="stylesheet" href="<?= base_url('assets/frontend/'); ?>css/style.css" type="text/css">
 
   <!-- SweetAlert -->
-  <link rel="stylesheet" href="<?= base_url(''); ?>assets/extensions/sweetalert2/sweetalert2.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/backend/'); ?>assets/extensions/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
   <div id="alert-berhasil" data-flashdata="<?= $this->session->flashdata('berhasil'); ?>"></div>
   <div id="alert-gagal" data-flashdata="<?= $this->session->flashdata('gagal'); ?>"></div>
+
+  <?php
+  $tempnum = $this->db->join('buku', 'buku.id_buku=temp.id_buku')->where('id_user', $this->session->userdata('id_user'))->from('temp')->count_all_results();
+  ?>
+
   <!-- Offcanvas Menu Begin -->
   <div class="offcanvas-menu-overlay"></div>
   <div class="offcanvas-menu-wrapper">
     <div class="offcanvas__option">
       <div class="offcanvas__links">
-        <a href="#">FAQs</a>
+        <a href="#">My Profile</a>
         <?php if (!$this->session->userdata('username')): ?>
           <a href="<?= base_url('auth'); ?>">Login / Register</a>
         <?php else: ?>
@@ -70,11 +75,12 @@
           <div class="col-lg-6 col-md-5">
             <div class="header__top__right">
               <div class="header__top__links">
-                <a href="#">FAQs</a>
+                <a href="#">My Profile</a>
                 <?php if (!$this->session->userdata('username')): ?>
                   <a href="<?= base_url('auth'); ?>">Login / Register</a>
                 <?php else: ?>
-                  <a href="<?= base_url('auth/logout'); ?>">Logout</a>
+                  <a href="#"><?= $this->session->userdata('nama'); ?></a>
+                  <a href="<?= base_url('auth/logout'); ?>" class="text-danger">Logout</a>
                 <?php endif ?>
               </div>
             </div>
@@ -98,7 +104,7 @@
             <ul>
               <li class="<?= $menu == '' ? 'active' : ($menu == 'homepage' ? 'active' : ''); ?>"><a href="<?= base_url(); ?>">Home</a></li>
               <li class="<?= $menu == 'book' ? 'active' : ''; ?>"><a href="<?= base_url('book'); ?>">Book</a></li>
-              <li><a href="#">Pages</a>
+              <!-- <li><a href="#">Pages</a>
                 <ul class="dropdown">
                   <li><a href="./about.html">About Us</a></li>
                   <li><a href="./shop-details.html">Shop Details</a></li>
@@ -106,18 +112,16 @@
                   <li><a href="./checkout.html">Check Out</a></li>
                   <li><a href="./blog-details.html">Blog Details</a></li>
                 </ul>
-              </li>
-              <li><a href="./blog.html">Blog</a></li>
-              <li><a href="./contact.html">Contacts</a></li>
+              </li> -->
+              <li class="<?= $menu == 'peminjaman-user' ? 'active' : ''; ?>"><a href=" <?= base_url('peminjaman-user'); ?>">Peminjaman</a></li>
+              <li class="<?= $menu == 'contact' ? 'active' : ''; ?>"><a href="<?= base_url('contact'); ?>">Contacts</a></li>
             </ul>
           </nav>
         </div>
         <div class="col-lg-3 col-md-3">
           <div class="header__nav__option">
-            <!-- <a href="#" class="search-switch"><img src="<?= base_url('assets/frontend/'); ?>img/icon/search.png" alt=""></a> -->
             <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""> <span>0</span></a>
-            <!-- <div class="price">$0.00</div> -->
+            <a href="<?= base_url('keranjang'); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""><span><?= $tempnum; ?></span></a>
           </div>
         </div>
       </div>
@@ -219,9 +223,11 @@
   <script src="<?= base_url('assets/frontend/'); ?>js/main.js"></script>
 
   <!-- sweetalert -->
-  <script src="<?= base_url(''); ?>assets/extensions/jquery/jquery.min.js"></script>
-  <script src="<?= base_url(''); ?>assets/extensions/sweetalert2/sweetalert2.min.js"></script>
-  <script src="<?= base_url(''); ?>assets/static/js/pages/sweetalert2.js"></script>
+  <script src="<?= base_url('assets/backend/'); ?>extensions/jquery/jquery.min.js"></script>
+  <script src="<?= base_url('assets/backend/'); ?>extensions/sweetalert2/sweetalert2.min.js"></script>
+  <script src="<?= base_url('assets/backend/'); ?>static/js/pages/sweetalert2.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.1/dist/sweetalert2.all.min.js"></script>
 
   <script>
     const success = $('#alert-berhasil').data('flashdata'),
@@ -238,6 +244,42 @@
         title: gagal
       });
     }
+
+    $(document).on("click", '#btn-hapus', function(e) {
+      e.preventDefault();
+      const href = $(this).attr("href");
+      Swal2.fire({
+        title: "Apakah anda yakin?",
+        text: "Data akan dihapus",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cencelBunttonColor: '#d33',
+        confirmButton: "Hapus Data!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.location = href;
+        }
+      });
+    });
+
+    $(document).on("click", '#btn-keranjang', function(e) {
+      e.preventDefault();
+      const href = $(this).attr("href");
+      Swal2.fire({
+        title: "Apakah anda yakin?",
+        text: "Buku akan dimasukkan kekeranjang?",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cencelBunttonColor: '#d33',
+        confirmButton: "Hapus Data!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.location = href;
+        }
+      });
+    });
   </script>
 </body>
 

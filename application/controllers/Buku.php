@@ -20,7 +20,7 @@ class Buku extends CI_Controller
       'kategori' => $this->db->get('kategori')->result(),
     ];
 
-    $this->template->load('template/layout', 'buku', $data);
+    $this->template->load('template/layout', 'admin/buku', $data);
   }
 
   public function simpan()
