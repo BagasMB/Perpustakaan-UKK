@@ -17,4 +17,12 @@ class Homepage extends CI_Controller
 
     $this->template->load('template/template_public', 'public/homepage', $data);
   }
+  
+  public function profile()
+  {
+    $data = [
+      'title' => 'My Profile',
+    ];
+    $this->template->load('template/template_public', 'public/myprofile', $data);
+  }
 }

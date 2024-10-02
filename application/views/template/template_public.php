@@ -40,7 +40,7 @@
   <div class="offcanvas-menu-wrapper">
     <div class="offcanvas__option">
       <div class="offcanvas__links">
-        <a href="#">My Profile</a>
+        <a href="<?= base_url('myprofile'); ?>">My Profile</a>
         <?php if (!$this->session->userdata('username')): ?>
           <a href="<?= base_url('auth'); ?>">Login / Register</a>
         <?php else: ?>
@@ -73,7 +73,7 @@
           <div class="col-lg-6 col-md-5">
             <div class="header__top__right">
               <div class="header__top__links">
-                <a href="#">My Profile</a>
+                <a href="<?= base_url('myprofile'); ?>">My Profile</a>
                 <?php if (!$this->session->userdata('username')): ?>
                   <a href="<?= base_url('auth'); ?>">Login / Register</a>
                 <?php else: ?>

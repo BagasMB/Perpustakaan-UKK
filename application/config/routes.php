@@ -59,7 +59,8 @@ $route['ulas'] = 'ulasan/ulas';
 $route['denda'] = 'peminjaman/bayardenda';
 
 // HomePage
-$route['homepage'] = 'public/homepage';
+$route['homepage'] = 'homepage';
+$route['myprofile'] = 'homepage/profile';
 
 // Peminjaman User 
 $route['peminjaman-user'] = 'public/PeminjamanUser';

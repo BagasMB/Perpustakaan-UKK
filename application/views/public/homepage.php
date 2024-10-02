@@ -44,13 +44,13 @@
                 <span class="label">New</span>
                 <ul class="product__hover">
                   <li>
-                    <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""></a>
+                    <a href="<?= base_url('favorit/tambah/' . $value->id_buku); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""><span>Favorit</span></a>
                   </li>
                   <li>
-                    <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""><span>Add Cart</span></a>
+                    <a href="<?= base_url('add-keranjang/' . $value->id_buku); ?>" id="btn-keranjang"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""><span>Add Cart</span></a>
                   </li>
                   <li>
-                    <a href="<?= base_url('book/detail/' . $value->id_buku); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/search.png" alt=""><span>Deatil</span></a>
+                    <a href="<?= base_url('book/detail/' . $value->id_buku); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/search.png" alt=""><span>Detail</span></a>
                   </li>
                 </ul>
               </div>
