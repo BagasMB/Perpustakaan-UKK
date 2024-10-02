@@ -35,6 +35,7 @@ class PeminjamanUser extends CI_Controller
   {
     if (!$this->session->userdata('username')) {
       redirect('auth');
+      $this->session->set_flashdata('gagal', 'Anda belum login, silahkan login terlebih dahulu');
     }
     $data = [
       'title' => 'Detail Peminjaman #' . $kode_peminjaman,

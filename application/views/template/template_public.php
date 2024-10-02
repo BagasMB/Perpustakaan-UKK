@@ -49,10 +49,8 @@
       </div>
     </div>
     <div class="offcanvas__nav__option">
-      <a href="#" class="search-switch"><img src="<?= base_url('assets/frontend/'); ?>img/icon/search.png" alt=""></a>
-      <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""></a>
-      <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""> <span>0</span></a>
-      <div class="price">$0.00</div>
+      <a href="<?= base_url('favorit'); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""></a>
+      <a href="<?= base_url('keranjang'); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""><span><?= $tempnum; ?></span></a>
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__text">
@@ -120,7 +118,7 @@
         </div>
         <div class="col-lg-3 col-md-3">
           <div class="header__nav__option">
-            <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""></a>
+            <a href="<?= base_url('favorit'); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""></a>
             <a href="<?= base_url('keranjang'); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""><span><?= $tempnum; ?></span></a>
           </div>
         </div>
@@ -263,6 +261,24 @@
       });
     });
 
+    $(document).on("click", '#btn-yakin', function(e) {
+      e.preventDefault();
+      const href = $(this).attr("href");
+      Swal2.fire({
+        title: "Apakah anda yakin?",
+        // text: "Data akan dihapus",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cencelBunttonColor: '#d33',
+        confirmButton: "Yakin!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.location = href;
+        }
+      });
+    });
+
     $(document).on("click", '#btn-keranjang', function(e) {
       e.preventDefault();
       const href = $(this).attr("href");
@@ -273,7 +289,7 @@
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cencelBunttonColor: '#d33',
-        confirmButton: "Hapus Data!",
+        confirmButton: "Yakin!",
       }).then((result) => {
         if (result.isConfirmed) {
           document.location = href;

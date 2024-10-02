@@ -75,4 +75,9 @@ $route['book/detail/(:num)'] = 'public/book/detail/$1';
 $route['book/category/(:num)'] = 'public/book/category/$1';
 
 // Contact 
+$route['favorit'] = 'public/favorit';
+$route['favorit/tambah/(:num)'] = 'public/favorit/tambah/$1';
+$route['favorit/hapus/(:num)'] = 'public/favorit/hapus/$1';
+
+// Contact 
 $route['contact'] = 'public/contact';

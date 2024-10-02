@@ -73,7 +73,7 @@
                   <span class="label"><?= $buk->stok == 0 ? 'Tidak Tersedia' : 'Tersedia'; ?></span>
                   <ul class="product__hover">
                     <li>
-                      <a href="#"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""><span>Favorit</span></a>
+                      <a href="<?= base_url('favorit/tambah/' . $buk->id_buku); ?>"><img src="<?= base_url('assets/frontend/'); ?>img/icon/heart.png" alt=""><span>Favorit</span></a>
                     </li>
                     <li>
                       <a href="<?= base_url('add-keranjang/' . $buk->id_buku); ?>" id="btn-keranjang"><img src="<?= base_url('assets/frontend/'); ?>img/icon/cart.png" alt=""><span>Add Cart</span></a>
